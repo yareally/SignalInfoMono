@@ -29,8 +29,8 @@ namespace SignalInfo
         private const int MAX_SIGNAL_ENTRIES = 14;
 
         private const string TAG = "SignalInfo";
-        private MyPhoneStateListener listen = null;
-        private TelephonyManager tm = null;
+        private MyPhoneStateListener listen;
+        private TelephonyManager tm;
 
         /// <summary>
         /// Loads the app.
@@ -130,7 +130,7 @@ namespace SignalInfo
         /// Set the signal info the user sees.
         /// </summary>
         /// <param name="signalStrength">contains all the signal info</param>
-        /// <see cref="android.telephony.SignalStrength"/>
+        /// <see cref="Android.Telephony.SignalStrength"/>
         private void setSignalInfo(SignalStrength signalStrength)
         {
             Log.Debug(TAG, "formatting sig str");
@@ -176,12 +176,12 @@ namespace SignalInfo
                         currentTextView.Text = sigValue + db;
                     }
                 }
-                catch (ArrayIndexOutOfBoundsException e) {
+                catch (ArrayIndexOutOfBoundsException) {
                     Log.Wtf(TAG, "This phone is probably old or the OEM (likely samsung) " +
                                  "half-arsed the Telephony API :( " +
                                  "(see: http://code.google.com/p/android/issues/detail?id=18336)");
                 }
-                catch (Android.Content.Res.Resources.NotFoundException ignored) {
+                catch (Android.Content.Res.Resources.NotFoundException) {
                     currentTextView.Text = DEFAULT_TXT;
                 }
             }
@@ -222,7 +222,7 @@ namespace SignalInfo
                     Log.Debug(TAG, "array data: " + childName);
                     Log.Debug(TAG, "array data len: " + childName.Length);
                 }
-                catch (Android.Content.Res.Resources.NotFoundException ignored) {
+                catch (Android.Content.Res.Resources.NotFoundException) {
                     Log.Error(TAG, "Could not parse signal textviews");
                 }
             }
